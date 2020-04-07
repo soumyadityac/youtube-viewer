@@ -1,0 +1,3 @@
+. ~/.bashrc
+
+node index.js
