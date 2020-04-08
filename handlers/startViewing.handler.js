@@ -14,12 +14,15 @@ const startViewingHandler = async ({ targetUrl, durationInSeconds, port }) => {
       height: 480,
       deviceScaleFactor: 1,
     });
+    await page.goto("https://api.ipify.org/", { waitUntil: "load" });
+    const ipAddr = await page.$eval('body', body => body.innerText);
     const targetUrlsList = _take(_shuffle(targetUrl), 10);
     for (const url of targetUrlsList) {
-      console.log(`Attempting ${url}`);
+      console.log(`Attempting ${url} with IP: ${ipAddr}`);
       await page.goto(url, { waitUntil: "load" });
       await page.mouse.click(100, 100);
       await page.waitFor(durationInSeconds * 1000);
+      // console.log("IMAGE \n", await page.screenshot({ encoding: 'base64' }));
     }
     await page.close();
     await browser.close();

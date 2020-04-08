@@ -1,7 +1,5 @@
 FROM ubuntu:xenial
 
-ARG VIEW_PER_CONTAINER=2000
-
 # Creating bash configuration file
 RUN touch ~/.bashrc
 
@@ -27,10 +25,5 @@ COPY ./package.json .
 COPY ./startService.sh .
 
 RUN . ~/.bashrc && npm install
-
-# Using the values to set the default runtime ENVs
-ENV VIEW_PER_CONTAINER=$VIEW_PER_CONTAINER
-ENV DURATION=40
-ENV TARGET_URL=https://www.youtube.com/watch?v=x9Cs451PI9U
 
 CMD ["sh", "startService.sh"]
