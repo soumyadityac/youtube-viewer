@@ -1,5 +1,9 @@
 const store = {};
 
+const logFailedAttempt = (url, ipAddr) => {
+  console.log(`An attempt to view ${url} with IP: ${ipAddr} was probably blocked.`);
+}
+
 const logCount = async (page, url, ipAddr, duration) => {
   try {
     const currentLiveViewCount = await page.$eval('.view-count', viewCountNode => viewCountNode.innerText.replace(/[^0-9]/g,''));
@@ -8,8 +12,8 @@ const logCount = async (page, url, ipAddr, duration) => {
     store[url].added =  store[url].current - store[url].initial;
     console.log(`Attempted ${url} with IP: ${ipAddr} for ${duration} seconds.\nInit View Count: ${store[url].initial} Current View Count: ${store[url].current} Views added this session: ${store[url].added}`)
   } catch {
-    console.log(`An attempt to view ${url} with IP: ${ipAddr} was probably blocked.`);
+    logFailedAttempt(url, ipAddr);
   }
 }
 
-module.exports = { logCount };
+module.exports = { logCount, logFailedAttempt };
