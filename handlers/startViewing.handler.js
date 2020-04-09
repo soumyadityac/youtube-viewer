@@ -25,7 +25,7 @@ const startViewingHandler = async ({ targetUrl, durationInSeconds, port }) => {
   try {
     const browser = await puppeteer.getBrowserInstance(port);
     const page = await browser.newPage();
-    page.setDefaultTimeout(120000);
+    page.setDefaultTimeout(600000);
     await page.setViewport({
       width: 640,
       height: 480,

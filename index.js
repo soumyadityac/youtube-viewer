@@ -1,8 +1,9 @@
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 const startViewingHandler = require('./handlers/startViewing.handler');
+const { isProduction } = require('./utils');
 
 const START_PORT = 9052;
-const BATCH_COUNT = 6;
+const BATCH_COUNT = isProduction() ? 6 : 1;
 
 let successes = 0, failures = 0, total = 0;
 
@@ -16,7 +17,7 @@ const writeTorConfig = (count) => {
   const promiseArr = [];
   for(let i = 0; i < count; i++) {
     const port = START_PORT + i;
-    promiseArr.push(execWithPromise(`echo "SocksPort ${port}" >> /etc/tor/torrc`));
+    promiseArr.push(execWithPromise(`touch /etc/tor/torrc && echo "SocksPort ${port}" >> /etc/tor/torrc`));
   }
   return Promise.all(promiseArr);
 }
@@ -26,22 +27,20 @@ const startTor = async () => {
   try {
     await execWithPromise('pkill -9 -f "tor"');
   } catch {
-    try {
-      await execWithPromise('/etc/init.d/tor stop');
-    } catch {
-      console.log("Failed to stop TOR.");
-    }
+    console.log("Failed to stop TOR.");
   }
 
   try {
-    await execWithPromise('/etc/init.d/tor start');
+    // Hackish. Waiting for 5 seconds for TOR to bootstrap.
+    spawn('tor', [], { detached: true, stdio: 'ignore' });
+    return new Promise(res => setTimeout(res, 5000));
   } catch {
     process.exit(1); // container restarts with non zero exit
   }
 }
 
 const handleBatchView = async (options, index) => {
-  await startTor();
+  if(isProduction()) await startTor();
   const promiseArr = [];
   for(let i = 0; i < BATCH_COUNT; i++) {
     const port = START_PORT + i;
@@ -142,7 +141,10 @@ async function main() {
 
   console.log(`Request received to generate ${count} views. Target URL: ${targetUrl} Duration: ${durationInSeconds} seconds`);
   console.log(`----------------------------------------------`);
-  console.log('-------- Written Tor Config -------- \n', await writeTorConfig(BATCH_COUNT));
+  if(isProduction()) {
+    console.log('App running in production. Will use rotating proxy via TOR.');
+    console.log('-------- Written Tor Config -------- \n', await writeTorConfig(BATCH_COUNT));
+  }
 
   for(let i = 0; i < Math.ceil(count/BATCH_COUNT); i++) {
     console.time(`Batch ${i+1} `);

@@ -1,3 +1,6 @@
-const logger = require('./logger');
+const _once = require('lodash/once')
 
-module.exports = { logger };
+const logger = require('./logger');
+const isProduction = _once(() => process.env.NODE_ENV === 'production');
+
+module.exports = { logger, isProduction };
