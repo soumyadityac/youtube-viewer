@@ -14,7 +14,7 @@ const watchVideos = async (page, ipAddr, targetUrlsList, durationInSeconds) => {
   for (const url of targetUrlsList) {
     await page.goto(url, { waitUntil: "load" });
     try {
-      await page.waitForSelector('.view-count', { timeout: 10000 });
+      await page.waitForSelector('.view-count', { timeout: 5000 });
       await page.mouse.click(100, 100);
       const duration = (durationInSeconds + _random(-20, 0, true));
       await page.waitFor(duration * 1000);
