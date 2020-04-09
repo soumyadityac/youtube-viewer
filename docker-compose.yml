@@ -3,3 +3,4 @@ services:
   ytview:
     build:
       context: .
+    restart: unless-stopped

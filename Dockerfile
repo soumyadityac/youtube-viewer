@@ -20,6 +20,7 @@ WORKDIR /app
 # Copy app artifacts and dependencies
 COPY ./core ./core 
 COPY ./handlers ./handlers
+COPY ./utils ./utils
 COPY ./index.js .
 COPY ./package.json .
 COPY ./startService.sh .

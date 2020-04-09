@@ -36,7 +36,7 @@ const startTor = async () => {
   try {
     await execWithPromise('/etc/init.d/tor start');
   } catch {
-    process.exit();
+    process.exit(1); // container restarts with non zero exit
   }
 }
 
@@ -60,9 +60,16 @@ const handleBatchView = async (options, index) => {
 }
 
 async function main() {
-  const count = 5000;
-  const durationInSeconds = 40;
+  const count = 96;
+  const durationInSeconds = 60;
   const targetUrl = [
+    // // Soumo
+    "https://www.youtube.com/watch?v=X5mLy8L2-t4",
+    "https://www.youtube.com/watch?v=dGoaL9FWqSQ",
+    "https://www.youtube.com/watch?v=iu5R-wdg1rk",
+    "https://www.youtube.com/watch?v=wW-z9q9_dpc",
+    "https://www.youtube.com/watch?v=NGQA-S-abxM",
+
     // // PP
     "https://www.youtube.com/watch?v=VsrjyQ4B7ac", 
     "https://www.youtube.com/watch?v=x9Cs451PI9U", 
@@ -142,7 +149,7 @@ async function main() {
     await handleBatchView({ targetUrl, durationInSeconds }, i);
     console.timeEnd(`Batch ${i+1} `);
   }
-  process.exit();
+  process.exit(1); // container restarts with non zero exit
 }
 
 main();
