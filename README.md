@@ -1,8 +1,10 @@
-    /\_/\___  _   _| |_ _   _| |__   ___  /\   /(_) _____      _____ _ __ 
-    \_ _/ _ \| | | | __| | | | '_ \ / _ \ \ \ / | |/ _ \ \ /\ / / _ | '__|
-     / | (_) | |_| | |_| |_| | |_) |  __/  \ V /| |  __/\ V  V |  __| |   
-     \_/\___/ \__,_|\__|\__,_|_.__/ \___|   \_/ |_|\___| \_/\_/ \___|_|   
-                                                                      
+```
+ __   __          _         _           __     ___                          ____        _   
+ \ \ / ___  _   _| |_ _   _| |__   ___  \ \   / (_) _____      _____ _ __  | __ )  ___ | |_ 
+  \ V / _ \| | | | __| | | | '_ \ / _ \  \ \ / /| |/ _ \ \ /\ / / _ | '__| |  _ \ / _ \| __|
+   | | (_) | |_| | |_| |_| | |_) |  __/   \ V / | |  __/\ V  V |  __| |    | |_) | (_) | |_ 
+   |_|\___/ \__,_|\__|\__,_|_.__/ \___|    \_/  |_|\___| \_/\_/ \___|_|    |____/ \___/ \__| 
+```
 
 ## Introduction
 
@@ -21,13 +23,17 @@ A modern (and portable) approach to inflating view counts in Youtube - using [Pu
 
 The following commands will help create a docker image, build the app and run it -
 
-    docker-compose build
-    docker-compose up --scale ytview=5
+```console
+~$ docker-compose build
+~$ docker-compose up --scale ytview=5
+```
     
   If you happen to have *npm* in your system, you can also choose to run the app via -
 
-    npm run build 
-    npm start ytview=5
+```console
+~$ npm run build 
+~$ npm start ytview=5
+```
 
 ## Fine tuning for performance
 
