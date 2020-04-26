@@ -14,6 +14,7 @@ RUN apk add --no-cache \
       tor
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV NODE_ENV production
 
 # Create app directory
 WORKDIR /app
@@ -28,4 +29,4 @@ COPY ./startService.sh .
 
 RUN npm install
 
-CMD ["sh", "startService.sh"]
+CMD ["node", "index"]

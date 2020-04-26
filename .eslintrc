@@ -1,9 +1,15 @@
 {
+  "extends": "airbnb",
   "parserOptions": {
-        "ecmaVersion": 2020
-    },
-
-    "env": {
-        "es6": true
-    }
+      "ecmaVersion": 2020
+  },
+  "env": {
+      "es6": true
+  },
+  "rules": {
+    "max-len": 0,
+    "no-console": 0,
+    "no-await-in-loop": 0,
+    "no-underscore-dangle": 0
+  }
 }
