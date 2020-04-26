@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:docker": "docker build -t serverlesspdf .",
-    "run:docker": "docker run -i serverlesspdf:latest",
-    "upload": "npm run build:docker && npm run run:docker"
+    "build": "docker-compose build --no-cache",
+    "start": "docker-compose up --scale",
+    "start:dev": "node index"
   },
   "author": "",
   "license": "ISC",

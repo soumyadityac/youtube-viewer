@@ -37,8 +37,8 @@ const startTor = async () => {
   logger.info('Starting TOR.');
   await stopTor();
   try {
-    const shellResponse = await execWithPromise('/usr/bin/tor --RunAsDaemon 1');
-    logger.success(`Started TOR successfully. Message: ${shellResponse}`);
+    await execWithPromise('/usr/bin/tor --RunAsDaemon 1');
+    logger.success(`Started TOR successfully`);
   } catch {
     logger.error('Failed to stop TOR.');
     throw new Error();

@@ -22,11 +22,13 @@ WORKDIR /app
 # Copy app artifacts and dependencies
 COPY ./core ./core 
 COPY ./handlers ./handlers
+COPY ./helpers ./helpers
+COPY ./services ./services
 COPY ./utils ./utils
 COPY ./index.js .
 COPY ./package.json .
-COPY ./startService.sh .
+COPY ./urls.txt .
 
 RUN npm install
 
-CMD ["node", "index"]
+CMD ["node", "index" ,"--color=16m"]
