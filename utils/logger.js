@@ -1,13 +1,20 @@
 const chalk = require('chalk');
 
+const { IS_PROD } = require('./constants');
+
 const store = {};
 
-const info = (message) => console.log(`${chalk.blue.inverse(`[INFO] [${(new Date()).toLocaleTimeString()}]`)} ${chalk.blue(message)}`);
-const error = (message) => console.log(`${chalk.red.inverse(`[ERROR] [${(new Date()).toLocaleTimeString()}]`)} ${chalk.red(message)}`);
-const success = (message) => console.log(`${chalk.green.inverse(`[SUCCESS] [${(new Date()).toLocaleTimeString()}]`)} ${chalk.green(message)}`);
+const info = (message) => console.log(`${chalk.white.inverse(` [${(new Date()).toLocaleTimeString()}] - INFO    `)} ${chalk.white(message)}`);
+const error = (message) => console.log(`${chalk.red.inverse(` [${(new Date()).toLocaleTimeString()}] - ERROR   `)} ${chalk.red(message)}`);
+const success = (message) => console.log(`${chalk.green.inverse(` [${(new Date()).toLocaleTimeString()}] - SUCCESS `)} ${chalk.green(message)}`);
+const debug = (message) => {
+  if (IS_PROD) return;
+  console.log(`${chalk.magenta.inverse(` [${(new Date()).toLocaleTimeString()}] - DEBUG   `)} ${chalk.magenta(message)}`);
+};
+const warn = (message) => console.log(`${chalk.yellow.inverse(` [${(new Date()).toLocaleTimeString()}] - WARN    `)} ${chalk.yellow(message)}`);
 
 const logFailedAttempt = (url, ipAddr) => {
-  error(`An attempt to view ${url} with IP: ${ipAddr} was probably blocked.`);
+  warn(`An attempt to view ${url} with IP: ${ipAddr} was probably blocked.`);
 };
 
 const logCount = async (page, url, ipAddr, duration) => {
@@ -27,5 +34,7 @@ module.exports = {
   logFailedAttempt,
   info,
   error,
+  warn,
   success,
+  debug,
 };

@@ -27,7 +27,8 @@ const viewVideosInBatch = async ({ targetUrls, durationInSeconds, port }) => {
     await watchVideosInSequence(page, ipAddr, targetUrlsForAction, durationInSeconds);
     await page.close();
   } catch (error) {
-    logger.error(`Entire view action in a batch failed. Error: ${error}`);
+    logger.warn('Entire view action in a batch failed. Waiting for TOR to acquire a new set of IPs');
+    logger.debug(error);
   } finally {
     await browser.close();
   }
