@@ -44,7 +44,7 @@ The following commands will help create a docker image, build the app and run it
  - **View Action**: This represents a single browser instance picking up a fixed number of urls from the pool and visiting them sequentially.
  - **View Action Count**: A single browsing session will watch these many videos sequentially.
  - **Total Count** - Total number of view actions. Ensure this number is exactly divisible by **Batch Count** for optimal resource utilisation.
- - **View Duration** - Max duration in seconds of a single view in view action. Actual view duration will be +/- 16.6% of this number.
+ - **View Duration** - Average duration in seconds of a single view in view action. Actual view duration will be +/- 16.6% of this number.
 
 You may choose to alter the above params in `utils/constants/index.js` for fine tuning according to your needs. 
 
