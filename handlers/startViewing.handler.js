@@ -15,14 +15,17 @@ const startViewingHandler = async (options, index) => {
     const port = options.startPort + i;
     promiseArr.push(YTBrowserService.viewVideosInBatch({ ...options, port }));
   }
-  return Promise.allSettled(promiseArr).then((settedPromises) => _each(settedPromises, ({ status }, i) => {
-    total += 1;
-    if (status === 'fulfilled') successes += 1;
-    else failures += 1;
+  return Promise.allSettled(promiseArr).then((settedPromises) => {
+    logger.info('Batch Summary -');
+    _each(settedPromises, ({ status }, i) => {
+      total += 1;
+      if (status === 'fulfilled') successes += 1;
+      else failures += 1;
 
-    logger.info(`View ${index * options.batchCount + i + 1} - ${status}`);
-    logger.info(`Success - ${successes}\t Failed - ${failures}\t Total - ${total}`);
-  }));
+      logger.info(`View ${index * options.batchCount + i + 1} - ${status}`);
+      logger.info(`Fulfilled - ${successes}\t Failed - ${failures}\t Total - ${total}`);
+    });
+  });
 };
 
 module.exports = startViewingHandler;
