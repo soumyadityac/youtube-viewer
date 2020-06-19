@@ -17,6 +17,7 @@ const viewVideosInBatch = async ({ targetUrls, durationInSeconds, port }) => {
     browser = await puppeteer.getBrowserInstance(port);
     const page = await browser.newPage();
     page.setDefaultTimeout(PAGE_DEFAULT_TIMEOUT * 1000);
+    page.on('error', msg => { throw msg }); // https://github.com/puppeteer/puppeteer/issues/3709
     await page.setViewport({
       width: 640,
       height: 480,
