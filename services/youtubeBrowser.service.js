@@ -11,13 +11,20 @@ const getCurrentIP = async (page) => {
   return page.$eval('body', (body) => body.innerText);
 };
 
+const handlePageCrash = (page) => (error) => {
+  logger.error(`Page Crashed! ${error}`);
+  page.close();
+};
+
 const viewVideosInBatch = async ({ targetUrls, durationInSeconds, port }) => {
   let browser;
   try {
     browser = await puppeteer.getBrowserInstance(port);
     const page = await browser.newPage();
     page.setDefaultTimeout(PAGE_DEFAULT_TIMEOUT * 1000);
-    page.on('error', msg => { throw msg }); // https://github.com/puppeteer/puppeteer/issues/3709
+    page.on('error', handlePageCrash(page));
+    page.on('pageerror', handlePageCrash(page));
+
     await page.setViewport({
       width: 640,
       height: 480,
