@@ -15,6 +15,7 @@ RUN apk add --no-cache \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV NODE_ENV production
+ENV YOUTUBE_VIEWER_FORCE_DEBUG true
 
 # Create app directory
 WORKDIR /app

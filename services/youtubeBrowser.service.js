@@ -12,7 +12,8 @@ const getCurrentIP = async (page) => {
 };
 
 const handlePageCrash = (page) => (error) => {
-  logger.error(`Page Crashed! ${error}`);
+  logger.error('Browser page crashed');
+  logger.debug(error);
   page.close();
 };
 

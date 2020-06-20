@@ -1,4 +1,5 @@
 const IS_PROD = (process.env.NODE_ENV === 'production');
+const SHOULD_FORCE_DEBUG_LOGS = process.env.YOUTUBE_VIEWER_FORCE_DEBUG;
 const IP_GETTER_URL = 'https://api.ipify.org/';
 const URL_CONTAINER_FILE_NAME = 'urls.txt';
 
@@ -19,6 +20,7 @@ const PAGE_DEFAULT_TIMEOUT = 600;
 
 module.exports = {
   IS_PROD,
+  SHOULD_FORCE_DEBUG_LOGS,
   IP_GETTER_URL,
   URL_CONTAINER_FILE_NAME,
 
