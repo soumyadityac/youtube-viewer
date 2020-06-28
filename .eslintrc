@@ -1,15 +1,18 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
   "parserOptions": {
-      "ecmaVersion": 2020
-  },
-  "env": {
-      "es6": true
+    "ecmaVersion": 2020
   },
   "rules": {
-    "max-len": 0,
-    "no-console": 0,
-    "no-await-in-loop": 0,
-    "no-underscore-dangle": 0
+    "object-curly-spacing": [2, "always"],
+    "require-jsdoc": 0,
+    "max-len": 0
+  },
+  "env": {
+    "es6" : true,
+    "node": true
   }
 }

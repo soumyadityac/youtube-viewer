@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const stealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { IS_PROD } = require('../utils/constants');
 
-puppeteer.use(StealthPlugin());
+puppeteer.use(stealthPlugin());
 
 // In order to run chromium processes in parallel. https://github.com/puppeteer/puppeteer/issues/594#issuecomment-325919885
 process.setMaxListeners(Infinity);
