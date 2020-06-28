@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-const { IS_PROD } = require('./constants');
+const { IS_PROD, SHOULD_FORCE_DEBUG_LOGS } = require('./constants');
 
 const store = {};
 
@@ -8,7 +8,7 @@ const info = (message) => console.log(`${chalk.white.inverse(` [${(new Date()).t
 const error = (message) => console.log(`${chalk.red.inverse(` [${(new Date()).toLocaleTimeString()}] - ERROR   `)} ${chalk.red(message)}`);
 const success = (message) => console.log(`${chalk.green.inverse(` [${(new Date()).toLocaleTimeString()}] - SUCCESS `)} ${chalk.green(message)}`);
 const debug = (message) => {
-  if (IS_PROD) return;
+  if (!SHOULD_FORCE_DEBUG_LOGS && IS_PROD) return;
   console.log(`${chalk.magenta.inverse(` [${(new Date()).toLocaleTimeString()}] - DEBUG   `)} ${chalk.magenta(message)}`);
 };
 const warn = (message) => console.log(`${chalk.yellow.inverse(` [${(new Date()).toLocaleTimeString()}] - WARN    `)} ${chalk.yellow(message)}`);
