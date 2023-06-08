@@ -9,7 +9,7 @@ process.setMaxListeners(Infinity);
 
 const getBrowserInstance = async (port) => {
   const browser = await puppeteer.launch({
-    args: IS_PROD ? ['--no-sandbox', `--proxy-server=socks5://127.0.0.1:${port}`] : ['--no-sandbox'],
+    args: IS_PROD ? ['--no-sandbox', `--proxy-server=socks5://127.0.0.1:${port}`] : ['--no-sandbox', '--mute-audio'],
     devtools: !IS_PROD,
     executablePath: IS_PROD ? '/usr/bin/chromium-browser' : undefined,
   });
